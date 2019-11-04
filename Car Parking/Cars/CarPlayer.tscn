@@ -1,0 +1,135 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Cars/CarPlayer.gd" type="Script" id=1]
+[ext_resource path="res://assets/Cars/Cars Sprite.png" type="Texture" id=2]
+[ext_resource path="res://assets/Cars/TireBlack.png" type="Texture" id=3]
+[ext_resource path="res://assets/Cars/CarLight.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 19.5055
+height = 36.2126
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 40.9598, 22.2918 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "cometostart"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1005.06, 18.1168 ), Vector2( 464.977, 548.4 ) ]
+}
+
+[node name="CarPlayer" type="KinematicBody2D"]
+position = Vector2( 1011.57, 551.214 )
+collision_layer = 6
+collision_mask = 7
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+max_health = 100
+wheel_base = 30
+engine_power = 800
+braking = -450
+max_speed_reverse = 250
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0.237823, -0.475647 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="body" type="Sprite" parent="."]
+position = Vector2( 0.643921, -0.858551 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 332, 171, 75, 39 )
+
+[node name="tire1" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 16.9973, -18.0026 )
+rotation = -0.000153673
+texture = ExtResource( 3 )
+offset = Vector2( 5, 0 )
+
+[node name="tire2" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 17.0024, 15.9974 )
+rotation = -0.000153673
+texture = ExtResource( 3 )
+offset = Vector2( 5, 0 )
+
+[node name="tire3" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( -20, -18 )
+texture = ExtResource( 3 )
+
+[node name="tire4" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( -20, 16 )
+texture = ExtResource( 3 )
+
+[node name="headlight" type="Node2D" parent="."]
+editor/display_folded = true
+visible = false
+show_behind_parent = true
+position = Vector2( 55, -16 )
+
+[node name="headlight1" type="Sprite" parent="headlight"]
+scale = Vector2( 0.5, 0.6 )
+texture = ExtResource( 4 )
+
+[node name="headlight2" type="Sprite" parent="headlight"]
+position = Vector2( 0, 30 )
+scale = Vector2( 0.5, 0.6 )
+texture = ExtResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2( 1.1, 1.1 )
+
+[node name="EnteringArea" type="Area2D" parent="."]
+editor/display_folded = true
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnteringArea"]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/cometostart = SubResource( 3 )
+
+[node name="lookahead1" type="RayCast2D" parent="."]
+position = Vector2( 70, 0 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 55, 0 )
+collision_mask = 3
+
+[node name="lookahead2" type="RayCast2D" parent="."]
+position = Vector2( 0, -45 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, -30 )
+collision_mask = 3
+
+[node name="lookahead3" type="RayCast2D" parent="."]
+position = Vector2( -70, 0 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( -55, 0 )
+collision_mask = 3
+
+[node name="lookahead4" type="RayCast2D" parent="."]
+position = Vector2( 0, 45 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 3
+[connection signal="body_entered" from="EnteringArea" to="." method="_on_EnteringArea_body_entered"]

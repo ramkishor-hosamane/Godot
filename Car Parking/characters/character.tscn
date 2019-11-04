@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://characters/character.gd" type="Script" id=1]
+
+[node name="character" type="KinematicBody2D"]
+script = ExtResource( 1 )
+max_speed = 400
+rot_speed = 1.0
+
+[node name="body" type="AnimatedSprite" parent="."]
+rotation = 3.14159
+scale = Vector2( 0.5, 0.5 )
+
+[node name="collision" type="CollisionShape2D" parent="."]
