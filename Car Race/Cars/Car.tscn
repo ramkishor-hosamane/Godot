@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Cars/Car.gd" type="Script" id=1]
+
+[node name="Car" type="KinematicBody2D"]
+script = ExtResource( 1 )
+max_health = 100
+
+[node name="collision" type="CollisionShape2D" parent="."]
+
+[node name="body" type="Sprite" parent="."]
+region_enabled = true
+
+[node name="tire1" type="Sprite" parent="."]
+
+[node name="tire2" type="Sprite" parent="."]
+
+[node name="tire3" type="Sprite" parent="."]
+
+[node name="tire4" type="Sprite" parent="."]
+
+[node name="headlight" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="headlight1" type="Sprite" parent="headlight"]
+
+[node name="headlight2" type="Sprite" parent="headlight"]

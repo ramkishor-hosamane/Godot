@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Cars/Car.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Cars/Opponent.gd" type="Script" id=2]
+[ext_resource path="res://assets/Cars/Cars Sprite.png" type="Texture" id=3]
+[ext_resource path="res://assets/Cars/TireBlack.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 21.1179
+height = 34.361
+
+[node name="Opponent" instance=ExtResource( 1 )]
+position = Vector2( 235.713, 172.688 )
+script = ExtResource( 2 )
+wheel_base = 40
+engine_power = 800
+braking = -450
+max_speed_reverse = 250
+
+[node name="car" type="Sprite" parent="." index="0"]
+editor/display_folded = true
+
+[node name="body" type="Sprite" parent="car" index="0"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 111, 0, 74, 43 )
+
+[node name="tire1" type="Sprite" parent="car" index="1"]
+show_behind_parent = true
+position = Vector2( 16, -18 )
+texture = ExtResource( 4 )
+offset = Vector2( 5, 0 )
+
+[node name="tire2" type="Sprite" parent="car" index="2"]
+show_behind_parent = true
+position = Vector2( 16, 19 )
+texture = ExtResource( 4 )
+offset = Vector2( 5, 0 )
+
+[node name="tire3" type="Sprite" parent="car" index="3"]
+show_behind_parent = true
+position = Vector2( -20, -18 )
+texture = ExtResource( 4 )
+
+[node name="tire4" type="Sprite" parent="car" index="4"]
+show_behind_parent = true
+position = Vector2( -20, 19 )
+texture = ExtResource( 4 )
+
+[node name="headlight" type="Node2D" parent="car" index="5"]
+editor/display_folded = true
+
+[node name="headlight1" type="Sprite" parent="car/headlight" index="0"]
+
+[node name="headlight2" type="Sprite" parent="car/headlight" index="1"]
+
+[node name="collision" parent="." index="1"]
+visible = false
+rotation = 1.5708
+shape = SubResource( 1 )

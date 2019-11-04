@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://Cars/Map1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Cars/Opponent.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Cars/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://take_left_curve.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 336.577, 1123.29, 0, 0, 0, 0, 391.826, 1026.3, 0, 0, 0, 0, 524.422, 985.786, 0, 0, 0, 0, 516.51, 793.962, 0, 0, 0, 0, 516.51, 579.309, 0, 0, 0, 0, 513.86, 391.156, 0, 0, 0, 0, 516.51, 203.004, -36.9406, 32.236, 36.9406, -32.236, 543.211, 82.7897, -13.9443, 2.35228, 13.9443, -2.35228, 1106.57, 70.842, 0, 0, 0, 0, 1573.87, 67.8518, 0, 0, 0, 0, 1786.9, 70.5232, -18.6157, -25.7755, 18.6157, 25.7755, 1905.01, 96.5875, 0, 0, 0, 0, 1926.18, 245.642, 0, 0, 0, 0, 1921.03, 505.108, 0, 0, 0, 0, 1915.73, 929.114, 39.5594, -11.2654, -39.5594, 11.2654, 1865.38, 1005.96, 0, 0, 0, 0, 1722.28, 1013.92, 0, 0, 0, 0, 1229.37, 1003.31, 0, 0, 0, 0, 642.855, 998.339, 25.7825, 0, -25.7825, 0, 450.259, 1000.66, 6.13869, -18.4161, -6.13869, 18.4161, 397.258, 1045.72, 0, 0, 0, 0, 368.108, 1104.02, 31.9212, 2.45548, -31.9212, -2.45548, 312.457, 1146.42, 14.7329, 30.6935, -14.7329, -30.6935, 230.306, 1114.62, 0, 0, 0, 0, 232.956, 762.161, 0, 0, 0, 0, 240.906, 449.457, -1.22774, 56.476, 1.22774, -56.476, 235.606, 144.703, -8.59417, -2.45548, 8.59417, 2.45548, 190.555, 81.102, 0, 0, 0, 0, 142.855, 73.1519 )
+}
+
+[node name="main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Map1" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.819608, 0.819608, 0.819608, 1 )
+
+[node name="Opponent" parent="." instance=ExtResource( 3 )]
+position = Vector2( 690, 880 )
+rotation = -1.55193
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 473.512, 872.829 )
+rotation = -1.5708
+
+[node name="currentPath" type="Path2D" parent="."]
+position = Vector2( 513.86, 934.414 )
+rotation = -1.55193
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="currentPath"]
+position = Vector2( -3.46083e-006, 1.56156e-005 )
+
+[node name="PathMain" type="Path2D" parent="."]
+visible = false
+position = Vector2( 8.68205e-006, -8.72941e-006 )
+curve = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1206.33, 626.846 )
+current = true
+zoom = Vector2( 2.8, 2.8 )
+
+[node name="take_left_curve" parent="." instance=ExtResource( 5 )]
+[connection signal="set_path" from="Opponent" to="." method="set_path_for_opponent"]
